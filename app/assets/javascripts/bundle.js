@@ -42,9 +42,27 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	const FollowToggle = __webpack_require__(1);
+	
+	$(() => {
+	  $('button.follow-toggle').forEach((i, b) => new FollowToggle(b));
+	})
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
-
+	class FollowToggle {
+	  constructor(el) {
+	    this.$el = $(el);
+	    this.userId = this.$el.data('user-id');
+	    this.followState = this.$el.data('initial-follow-state');
+	  }
+	};
+	
+	module.exports = FollowToggle;
 
 /***/ })
 /******/ ]);
