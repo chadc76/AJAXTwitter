@@ -47,7 +47,7 @@
 	const FollowToggle = __webpack_require__(1);
 	
 	$(() => {
-	  $('button.follow-toggle').forEach((i, b) => new FollowToggle(b));
+	  $('button.follow-toggle').each((i, b) => new FollowToggle(b));
 	})
 
 /***/ }),
