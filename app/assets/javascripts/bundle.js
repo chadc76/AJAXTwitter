@@ -46,9 +46,9 @@
 
 	const FollowToggle = __webpack_require__(1);
 	
-	$(() => {
-	  $('button.follow-toggle').each((i, b) => new FollowToggle(b));
-	})
+	$(function () {
+	  $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
+	});
 
 /***/ }),
 /* 1 */
@@ -59,6 +59,13 @@
 	    this.$el = $(el);
 	    this.userId = this.$el.data('user-id');
 	    this.followState = this.$el.data('initial-follow-state');
+	
+	    this.render();
+	  }
+	
+	  render() {
+	    let text = this.followState === 'followed' ? 'Followed!' : 'Unfollowed!';
+	    this.$el.html(text);
 	  }
 	};
 	
