@@ -11,7 +11,15 @@ const APIUtil = {
       method
     })
   ),
-
+	
+	searchUsers: queryVal => {
+		$.ajax({
+			url: 'users/search',
+			dataType: 'json',
+			method: 'GET',
+			data:  { queryVal }
+		})
+	}
 };
 
 module.exports = APIUtil;
