@@ -12,11 +12,21 @@ class UsersSearch {
   handleInput(event) {
 
     APIUtil.searchUsers(this.$input.val())
-      .then(users => this.render(users));
+      .then(users => this.renderResults(users));
   }
 
-  render(users) {
-    console.log(users)
+  renderResults(users) {
+    this.$ul.empty();
+    users.forEach(user => {
+
+      let $a = $(`<a></a>`);
+      $a.text(`@${user.username}`);
+      $a.attr('href', `/users/${user.id}`);
+
+      let $li = $('<li></li>')
+      $li.append($a);
+      this.$ul.append($li);
+    })
   }
 };
 
