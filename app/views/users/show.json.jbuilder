@@ -1,0 +1,1 @@
+son.partial!("tweets/tweet", tweet: @tweet)
