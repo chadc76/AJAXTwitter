@@ -48,8 +48,8 @@
 	const UsersSearch = __webpack_require__(4);
 	
 	$(function () {
+	  $('.users-search').each((i, search) => new UsersSearch(search));
 	  $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
-	  $('nav.users-search').each((i, search) => new UsersSearch(search));
 	});
 
 /***/ }),
@@ -133,27 +133,41 @@
 	    })
 	  ),
 		
-		searchUsers: queryVal => {
+		searchUsers: query => (
 			$.ajax({
-				url: 'users/search',
+				url: '/users/search',
 				dataType: 'json',
 				method: 'GET',
-				data:  { queryVal }
+				data: { query }
 			})
-		}
+		),
 	};
 	
 	module.exports = APIUtil;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+	const APIUtil = __webpack_require__(3);
+	
 	class UsersSearch {
 	  constructor(el) {
 	    this.$el = $(el);
-	    this.input = this.$el.find('input');
-	    this.ul = this.$el.find('.users');
+	    this.$input = this.$el.find('input[name=username]');
+	    this.$ul = this.$el.find('.users');
+	
+	    this.$input.on('input', this.handleInput.bind(this));
+	  }
+	
+	  handleInput(event) {
+	
+	    APIUtil.searchUsers(this.$input.val())
+	      .then(users => this.render(users));
+	  }
+	
+	  render(users) {
+	    console.log(users)
 	  }
 	};
 	
