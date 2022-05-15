@@ -72,11 +72,15 @@
 	    e.preventDefault();
 	
 	    if (this.followState === 'followed') {
+	      this.followState = 'unfollowing';
+	      this.render();
 	      APIUtil.unfollowUser(this.userId).then(() => {
 	        followToggle.followState = 'unfollowed';
 	        followToggle.render();
 	      });
 	    } else if (this.followState === 'unfollowed') {
+	      this.followState = 'following';
+	      this.render();
 	      APIUtil.followUser(this.userId).then(() => {
 	        followToggle.followState = 'followed';
 	        followToggle.render();
@@ -85,12 +89,24 @@
 	  }
 	
 	  render() {
-	    let text = this.followState === 'followed' ? 'Unfollow!' : 'Follow!';
-	    this.$el.html(text);
-	  }
-	
-	  toggleFollow() {
-	    this.followState = this.followState === 'followed' ? 'unfollowed' : 'followed';
+	    switch (this.followState) {
+	      case 'followed':
+	        this.$el.prop('disabled', false);
+	        this.$el.html('Unfollow!');
+	        break;
+	      case 'unfollowed':
+	        this.$el.prop('disabled', false);
+	        this.$el.html('Follow!');
+	        break;
+	      case 'following':
+	        this.$el.prop('disabled', true);
+	        this.$el.html('Following...');
+	        break;
+	      case 'unfollowing':
+	        this.$el.prop('disabled', true);
+	        this.$el.html('Unfollowing...');
+	        break;
+	    }
 	  }
 	};
 	
