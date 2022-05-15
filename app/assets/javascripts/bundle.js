@@ -45,9 +45,11 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	const FollowToggle = __webpack_require__(1);
+	const TweetCompose = __webpack_require__(3);
 	const UsersSearch = __webpack_require__(4);
 	
 	$(function () {
+	  $('.tweet-compose').each((i, form) => new TweetCompose(form));
 	  $('.users-search').each((i, search) => new UsersSearch(search));
 	  $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
 	});
@@ -56,7 +58,7 @@
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	const APIUtil = __webpack_require__(3);
+	const APIUtil = __webpack_require__(2);
 	
 	class FollowToggle {
 	  constructor(el, options) {
@@ -115,8 +117,7 @@
 	module.exports = FollowToggle;
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 	const APIUtil = {
@@ -141,15 +142,59 @@
 				data: { query }
 			})
 		),
+	
+	  createTweet: data => {
+	    $.ajax({
+	      url: '/tweets',
+	      method: 'POST',
+	      dataType: 'json',
+	      data
+	    })
+	  }
 	};
 	
 	module.exports = APIUtil;
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	const APIUtil = __webpack_require__(2);
+	
+	class TweetCompose {
+	  constructor(el) {
+	    this.$el = $(el);
+	    this.$input = this.$el.find('textarea[name=tweet\\[content\\]]');
+	
+	    this.$el.on('submit', this.submit.bind(this));
+	  }
+	
+	  submit(event) {
+	    event.preventDefault();
+	    const data = this.$el.serializeJSON();
+	    
+	    this.$el.find(':input').prop('disabled', true);
+	
+	    APIUtil.createTweet(data).then(tweet => this.handleSuccess(tweet));
+	  }
+	
+	  handleSuccess(data) {
+	    this.clearInput();
+	  }
+	
+	  clearInput() {
+	    this.$input.val('');
+	    this.$form.find(':input').prop('disabled', false);
+	  }
+	}
+	
+	module.exports = TweetCompose;
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	const APIUtil = __webpack_require__(3);
+	const APIUtil = __webpack_require__(2);
 	const FollowToggle = __webpack_require__(1);
 	
 	class UsersSearch {
