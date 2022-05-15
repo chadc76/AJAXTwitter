@@ -45,9 +45,11 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	const FollowToggle = __webpack_require__(1);
+	const UsersSearch = __webpack_require__(4);
 	
 	$(function () {
 	  $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
+	  $('nav.users-search').each((i, search) => new UsersSearch(search));
 	});
 
 /***/ }),
@@ -130,10 +132,33 @@
 	      method
 	    })
 	  ),
-	
+		
+		searchUsers: queryVal => {
+			$.ajax({
+				url: 'users/search',
+				dataType: 'json',
+				method: 'GET',
+				data:  { queryVal }
+			})
+		}
 	};
 	
 	module.exports = APIUtil;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+	class UsersSearch {
+	  constructor(el) {
+	    this.$el = $(el);
+	    this.input = this.$el.find('input');
+	    this.ul = this.$el.find('.users');
+	  }
+	};
+	
+	
+	module.exports = UsersSearch;
 
 /***/ })
 /******/ ]);
