@@ -1,7 +1,9 @@
 body {
   background-color: #E6ECF0;
   color: #657786;
+}
 
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +22,8 @@ form {
   font-family: 'Fredoka One', cursive;
   font-size: 35px;
   color: #1da1f2;
-  padding: 25px 0;
+  padding-top: 25px;
+  padding-bottom: 25px;
   text-align: center;
 }
 

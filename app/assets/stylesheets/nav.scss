@@ -23,7 +23,6 @@ header {
     font-size: 50px;
     color: #1da1f2;
     position: relative;
-    
 
     tiny {
       color: red;
@@ -36,13 +35,14 @@ header {
       padding: 0 5px;
     }
   }
+
   .links {
-    display: flex; 
+    display: flex;
     height: 100%;
 
     li {
       display: flex;
-      align-items: center; 
+      align-items: center;
 
       &:hover {
         border-bottom: 3px solid rgb(101, 119, 134);
@@ -52,7 +52,8 @@ header {
         height: 100%;
       }
 
-      a, input[type='submit']{
+      a,
+      input[type='submit'] {
         height: calc(100% - 40px);
         padding: 20px;
         color: rgb(101, 119, 134);
