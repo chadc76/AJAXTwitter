@@ -49,7 +49,7 @@
 	const UsersSearch = __webpack_require__(4);
 	
 	$(function () {
-	  $('.tweet-compose').each((i, form) => new TweetCompose(form));
+	  $('form.tweet-compose').each((i, form) => new TweetCompose(form));
 	  $('.users-search').each((i, search) => new UsersSearch(search));
 	  $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
 	});
