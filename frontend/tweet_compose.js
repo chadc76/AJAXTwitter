@@ -23,7 +23,7 @@ class TweetCompose {
 
   clearInput() {
     this.$input.val('');
-    this.$form.find(':input').prop('disabled', false);
+    this.$el.find(':input').prop('disabled', false);
   }
 }
 

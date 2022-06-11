@@ -21,14 +21,14 @@ const APIUtil = {
 		})
 	),
 
-  createTweet: data => {
+  createTweet: data => (
     $.ajax({
       url: '/tweets',
       method: 'POST',
       dataType: 'json',
       data
     })
-  }
+  )
 };
 
 module.exports = APIUtil;
