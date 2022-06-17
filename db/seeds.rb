@@ -8,6 +8,8 @@
 
 User.destroy_all
 Tweet.destroy_all
+ApplicationRecord.connection.reset_pk_sequence!('users')
+ApplicationRecord.connection.reset_pk_sequence!('tweets')
 
 CATS = %w(breakfast earl curie markov gizmo kiki sally)
 
