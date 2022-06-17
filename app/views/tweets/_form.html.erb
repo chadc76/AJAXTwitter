@@ -5,11 +5,10 @@
       name="authenticity_token"
       value="<%= form_authenticity_token %>">
 
-  <label>
-    Content
-    <textarea name="tweet[content]"></textarea>
+  <label for='tweet-textarea'>What's on your mind?</label>
+    <textarea id='tweet-textarea'
+      name="tweet[content]" placeholder="What's on your mind?"></textarea>
     <strong class="char-left"></strong>
-  </label>
   <br>
 
   <label>
