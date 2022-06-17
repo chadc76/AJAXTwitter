@@ -18,6 +18,12 @@ class TweetCompose {
   }
 
   handleSuccess(data) {
+    const $tweetsUl = $(this.$el.data('tweets-ul'));
+    let tweetString = JSON.stringify(data);
+    const $li = $('<li></li>');
+    $li.html(tweetString);
+    $tweetsUl.prepend($li);
+    
     this.clearInput();
   }
 
